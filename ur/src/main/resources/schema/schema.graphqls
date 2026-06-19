@@ -1,0 +1,21 @@
+type Sindicato {
+    id: ID!
+    nombre: String!
+    codigo: String!
+}
+
+input SindicatoInput {
+    nombre: String!
+    codigo: String!
+}
+
+type Query {
+    sindicatos: [Sindicato!]!
+    sindicato(id: ID!): Sindicato
+}
+
+type Mutation {
+    createSindicato(input: SindicatoInput!): Sindicato!
+    updateSindicato(id: ID!, input: SindicatoInput!): Sindicato
+    deleteSindicato(id: ID!): Boolean!
+}

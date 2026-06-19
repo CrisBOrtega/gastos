@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
@@ -19,13 +20,18 @@ public class Afiliacion {
 
     private Long usuarioId;
 
+    @ManyToOne
+    @jakarta.persistence.JoinColumn(name = "sindicato_id")
+    private Sindicato sindicato;
+
     // Constructors
     public Afiliacion() {
     }
 
-    public Afiliacion(LocalDate fechaAfiliacion, Long usuarioId) {
+    public Afiliacion(LocalDate fechaAfiliacion, Long usuarioId, Sindicato sindicato) {
         this.fechaAfiliacion = fechaAfiliacion;
         this.usuarioId = usuarioId;
+        this.sindicato = sindicato;
     }
 
     // Getters and Setters
@@ -51,5 +57,13 @@ public class Afiliacion {
 
     public void setUsuarioId(Long usuarioId) {
         this.usuarioId = usuarioId;
+    }
+
+    public Sindicato getSindicato() {
+        return sindicato;
+    }
+
+    public void setSindicato(Sindicato sindicato) {
+        this.sindicato = sindicato;
     }
 }

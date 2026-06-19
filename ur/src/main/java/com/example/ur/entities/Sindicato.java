@@ -4,7 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "sindicatos")
@@ -16,6 +20,9 @@ public class Sindicato {
 
     private String nombre;
     private String codigo;
+
+    @OneToMany(mappedBy = "sindicato", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Afiliacion> afiliaciones = new ArrayList<>();
 
     // Constructors
     public Sindicato() {
@@ -49,5 +56,13 @@ public class Sindicato {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public List<Afiliacion> getAfiliaciones() {
+        return afiliaciones;
+    }
+
+    public void setAfiliaciones(List<Afiliacion> afiliaciones) {
+        this.afiliaciones = afiliaciones;
     }
 }
